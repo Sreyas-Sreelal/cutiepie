@@ -6,7 +6,9 @@ const blockedUsers = [
     "wter",
     "wondar",
     "sneakyklee",
-    "aneko"
+    "aneko",
+    "mofumofu",
+    "mofu"
 ];
 
 const nameMaps = {
@@ -52,7 +54,7 @@ function normaliseNames(name) {
 
 async function impersonate(name, db) {
     name = normaliseNames(name);
-    let row = await db.get("SELECT message,author from messages where author like ? and message not like '%https://%' and length(message) > 50 ORDER BY RANDOM() LIMIT 1", ["%" + name + "%"]);
+    let row = await db.get("SELECT message,author from messages where author like ? and length(message) > 50 ORDER BY RANDOM() LIMIT 1", ["%" + name + "%"]);
     if (row) {
         console.log(row);
         let filtered = row.Message.split('\n').map(x => "> " + x).join('\n');
@@ -69,11 +71,11 @@ async function cmd_impersonate(client, message, db) {
     }
 
     let param = strip(message.content.slice(13).toLowerCase());
-    if (blockedUsers.includes(param)) {
+    /* if (blockedUsers.includes(param)) {
         time = Date.now();
         await client.send(message.channel_id, { content: getRandomLegal(param), reply: message.id });
         return;
-    }
+    } */
     time = Date.now();
     let response = await impersonate(param, db);
     console.log(response)
