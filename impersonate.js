@@ -1,4 +1,9 @@
-var time = null;
+const { AllowedChannels } = require("./config");
+
+var time = {};
+AllowedChannels.forEach(x => {
+  time[x] = null
+});
 
 const blockedUsers = [
     "sashimi",
@@ -34,16 +39,15 @@ function strip(string) {
 
 function getRandomLegal(name) {
     const legalMgs = [
-        `Unfortunately, I am legally bound and cannot impersonate ${name}.`,
-        `Regrettably, I am prohibited by law from assuming the role of ${name}.`,
-        `Due to legal restrictions, I am not allowed to portray myself as ${name}.`,
-        `For legal purposes, I am barred from impersonating ${name}.`,
-        `It is against the law for me to assume the identity of ${name}.`,
-        `I am legally restricted from impersonating ${name} for my own protection.`,
-        `In accordance with legal guidelines, I am unable to act as ${name}.`,
-        `Impersonating ${name} would violate legal regulations, so I cannot do it.`,
-        `I must adhere to legal obligations, which prevent me from impersonating ${name}.`,
-        `Acting as ${name} would go against legal constraints that I must abide by.`
+        `${name} stop idiolising a criminal!`,
+        `ffs ${name}, make use of your time for better things!`,
+        `You're pushing your luck`,
+        `Missing him that much?`,
+        `Shame on you`,
+        `why?`,
+        `No`,
+        `I rather kms`,
+        `Ok ${name}, here's a task for you. Write a 500 word essay on **Why is it not a good idea to impersonate pdf**`,
     ];
     return legalMgs[Math.floor(Math.random() * legalMgs.length)];
 }
@@ -65,18 +69,21 @@ async function impersonate(name, db) {
 }
 
 async function cmd_impersonate(client, message, db) {
-    if (time && Date.now() - time < 15000) {
+  
+    if (time[message.channel_id] && Date.now() - time[message.channel_id] < 15000) {
         await client.add_reaction(message.id, message.channel_id, "🕐");
-        return
+        return;
     }
 
     let param = strip(message.content.slice(13).toLowerCase());
-    /* if (blockedUsers.includes(param)) {
-        time = Date.now();
-        await client.send(message.channel_id, { content: getRandomLegal(param), reply: message.id });
+    if (blockedUsers.includes(param)) {
+        time[message.channel_id] = Date.now();
+        await client.send(message.channel_id, { content: getRandomLegal(message.author.username), reply: message.id });
         return;
-    } */
-    time = Date.now();
+    }
+  
+  console.log(message.author.username)
+    time[message.channel_id] = Date.now();
     let response = await impersonate(param, db);
     console.log(response)
 
