@@ -9,8 +9,6 @@ const { cmd_makify } = require("./makify");
 const { cmd_impersonate } = require("./impersonate");
 const { cmd_wiki } = require("./wiki");
 
-//require('http').createServer((req, res) => res.end('Bot is alive!')).listen(3000)
-
 var db = null;
 
 client.on.ready = async function () {
