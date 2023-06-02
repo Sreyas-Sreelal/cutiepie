@@ -13,7 +13,8 @@ const blockedUsers = [
     "sneakyklee",
     "aneko",
     "mofumofu",
-    "mofu"
+    "mofu",
+    "Ruzashu"
 ];
 
 const nameMaps = {
