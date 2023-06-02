@@ -30,7 +30,9 @@ const nameMaps = {
     "vale": "Valé#7842",
     "hi": "hello》#4195",
     "hi⚡dr.ratioඞ": "hello》#4195",
-    "maki": "マキ#2515"
+    "maki": "マキ#2515",
+    "cow":"danni#8541",
+    "lia":"gef#3959"
 };
 
 function strip(string) {
