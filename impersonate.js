@@ -14,7 +14,7 @@ const blockedUsers = [
     "aneko",
     "mofumofu",
     "mofu",
-    "Ruzashu"
+    "ruzashu"
 ];
 
 const nameMaps = {
