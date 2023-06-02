@@ -2,7 +2,7 @@
   "name": "elit",
   "version": "1.0.0",
   "description": "",
-  "main": "bot.js",
+  "main": "index.js",
   "dependencies": {
     "discord-user-bots": "^1.4.0",
     "fs": "0.0.1-security",
