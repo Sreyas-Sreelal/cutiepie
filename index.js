@@ -8,6 +8,9 @@ const { AllowedChannels } = require("./config");
 const { cmd_makify } = require("./makify");
 const { cmd_impersonate } = require("./impersonate");
 const { cmd_wiki } = require("./wiki");
+const { cmd_copypasta } = require("./copypasta");
+
+require('http').createServer((req, res) => res.end('Bot is alive!')).listen(3000)
 
 var db = null;
 
@@ -47,6 +50,9 @@ client.on.message_create = async function (message) {
 
     if (AllowedChannels.includes(message.channel_id) && message.content.startsWith("/impersonate")) {
         await cmd_impersonate(client,message,db);
+    }
+  if (AllowedChannels.includes(message.channel_id) && message.content.startsWith("/copypasta")) {
+        await cmd_copypasta(client,message,db);
     }
 
 };

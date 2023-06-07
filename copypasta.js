@@ -60,9 +60,9 @@ function normaliseNames(name) {
     return nameMaps[name] ? nameMaps[name] : name;
 }
 
-async function impersonate(name, db) {
+async function copypasta(name, db) {
     name = normaliseNames(name);
-    let row = await db.get("SELECT message,author from messages where author like ? and length(message) > 50 ORDER BY RANDOM() LIMIT 1", ["%" + name + "%"]);
+    let row = await db.get("SELECT message,author from messages where author like ? and length(message) > 500 and length(message) <= 5000 ORDER BY RANDOM() LIMIT 1", ["%" + name + "%"]);
     if (row) {
         console.log(row);
         let filtered = row.Message.split('\n').map(x => "> " + x).join('\n');
@@ -72,14 +72,14 @@ async function impersonate(name, db) {
     }
 }
 
-async function cmd_impersonate(client, message, db) {
+async function cmd_copypasta(client, message, db) {
   
-    if (time[message.channel_id] && Date.now() - time[message.channel_id] <30*1000) {
+    if (time[message.channel_id] && Date.now() - time[message.channel_id] < 60*60*1000) {
         await client.add_reaction(message.id, message.channel_id, "🕐");
         return;
     }
 
-    let param = strip(message.content.slice(13).toLowerCase());
+    let param = strip(message.content.slice(11).toLowerCase());
     if (blockedUsers.includes(param)) {
         time[message.channel_id] = Date.now();
         await client.send(message.channel_id, { content: getRandomLegal(message.author.username), reply: message.id });
@@ -88,12 +88,12 @@ async function cmd_impersonate(client, message, db) {
   
   console.log(message.author.username)
     time[message.channel_id] = Date.now();
-    let response = await impersonate(param, db);
+    let response = await copypasta(param, db);
     console.log(response)
 
     await client.send(message.channel_id, { content: response, reply: message.id });
 }
 
 module.exports = {
-    cmd_impersonate
+    cmd_copypasta
 }
