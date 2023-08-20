@@ -74,7 +74,7 @@ async function impersonate(name, db) {
 
 async function cmd_impersonate(client, message, db) {
   
-    if (time[message.channel_id] && Date.now() - time[message.channel_id] <30*1000) {
+    if (time[message.channel_id] && message.channel_id!="1115758986134835281" &&  Date.now() - time[message.channel_id] <30*1000) {
         await client.add_reaction(message.id, message.channel_id, "🕐");
         return;
     }

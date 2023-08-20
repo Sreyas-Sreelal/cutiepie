@@ -22,7 +22,7 @@ function makify(text) {
 
 async function cmd_makify(client, message) {
     let param = message.content.slice(8).toLowerCase();
-    if (time && Date.now() - time < 15000) {
+    if (time && Date.now() - time < 15000 && message.channel_id!="1115758986134835281") {
         await client.add_reaction(message.id, message.channel_id, "🕐");
         return
     }
