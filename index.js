@@ -3,12 +3,7 @@ const client = new Discord.Client(process.env.TOKEN);
 const sqlite3 = require('sqlite3');
 const sqlite = require('sqlite');
 
-const { AllowedChannels } = require("./config");
-
-const { cmd_makify } = require("./makify");
-const { cmd_impersonate } = require("./impersonate");
-const { cmd_wiki } = require("./wiki");
-const { cmd_copypasta } = require("./copypasta");
+const { execute_command } = require("./command_executor");
 
 require('http').createServer((req, res) => res.end('Bot is alive!')).listen(3000)
 
@@ -39,22 +34,13 @@ client.on.message_create = async function (message) {
             process.exit();
         }, 5000);
     }
-    
-    if (AllowedChannels.includes(message.channel_id) && message.content.startsWith("/wiki")) {
-        await cmd_wiki(client,message);
-    }
+    if (message.content.startsWith("/")) {
+        let command_info = message.content.slice(1).split(" ");
+        let command_name = command_info[0];
+        let args = command_info.slice(1).join(' ');
+        await execute_command(command_name, args, client, message, db);
 
-    if (AllowedChannels.includes(message.channel_id) && message.content.startsWith("/makify")) {
-        await cmd_makify(client,message);
     }
-
-    if (AllowedChannels.includes(message.channel_id) && message.content.startsWith("/impersonate")) {
-        await cmd_impersonate(client,message,db);
-    }
-  if (AllowedChannels.includes(message.channel_id) && message.content.startsWith("/copypasta")) {
-        await cmd_copypasta(client,message,db);
-    }
-
 };
 
 client.on.discord_disconnect = function () {

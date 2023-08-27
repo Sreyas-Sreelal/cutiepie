@@ -1,31 +1,17 @@
 const wiki = require('wikipedia');
 
-async function wikisearch(text) {
+async function wiki_search(text) {
     try {
         const page = await wiki.page(text);
         console.log(page);
-        //Response of type @Page object
         const summary = await page.summary();
         console.log(summary);
-        return summary;
-        //Response of type @wikiSummary - contains the intro and the main image
+        return summary.extract.slice(0,summary.extract.length > 5000 ? 5000 : summary.extract.length);
     } catch (error) {
         console.log(error);
-        //=> Typeof wikiError
     }
 }
 
-async function cmd_wiki(client, message) {
-    /*
-    let summary = await wikisearch(message.content.slice(6));
-    if(summary) {
-        console.log(summary.extract.slice(0,100));
-        client.send(message.channel_id,{content:summary.extract.slice(0,100)})
-    } 
-    */
-    await client.send(message.channel_id, { content: "nice try, wiki is disabled bozo!" })
-}
-
 module.exports = {
-    cmd_wiki
+    wiki_search
 }

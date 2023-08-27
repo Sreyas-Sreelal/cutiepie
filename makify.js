@@ -1,4 +1,3 @@
-var time = null;
 var tokenizer = require('wink-tokenizer');
 var makiWords = require('./correct.json');
 var myTokenizer = tokenizer();
@@ -20,24 +19,6 @@ function makify(text) {
     return response;
 }
 
-async function cmd_makify(client, message) {
-    let param = message.content.slice(8).toLowerCase();
-    if (time && Date.now() - time < 15000 && message.channel_id!="1115758986134835281") {
-        await client.add_reaction(message.id, message.channel_id, "🕐");
-        return
-    }
-    if (param.includes("nigris")) {
-        await client.send(message.channel_id, { content: "Nope, I can't do that, no igris from me!", reply: message.id });
-        return;
-    }
-    let response = makify(param);
-    if (response) {
-        console.log(response);
-        await client.send(message.channel_id, { content: response, reply: message.id })
-        time = Date.now();
-    }
-}
-
 module.exports = {
-    cmd_makify
+    makify
 }
