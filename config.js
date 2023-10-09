@@ -20,22 +20,13 @@ const blockedUsers = [
 ];
 
 const nameMaps = {
-    "loona": "voi",
-    "vee": "voi",
-    "kei": "raiden#0236",
-    "risa": "Mio's Bass Guitar#2606",
-    "kuro": "-⚡🌹𝓚𝓾𝓻𝓸🌹⚡-#0777",
-    "rsimp": "Raiden|Mobius|Arlecchino Chair#0117",
-    "botman": "L᲼#7024",
-    "sakazu": "Valé#7842",
-    "sen": "Valé#7842",
-    "sak": "Valé#7842",
-    "vale": "Valé#7842",
-    "hi": "hello》#4195",
-    "hi⚡dr.ratioඞ": "hello》#4195",
-    "maki": "マキ#2515",
+    "loona": "kibty",
+    "vee": "kibty",
+    "risa": "mothershiprisanette",
+    "botman": "x_zl",
     "cow": "danni#8541",
-    "lia": "gef#3959"
+    "lia": "emiliaaaaaaa",
+    "gef":"emiliaaaaaaa"
 };
 
 module.exports = {
