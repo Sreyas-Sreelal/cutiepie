@@ -4,6 +4,7 @@ const { wiki_search } = require("./wiki");
 const { copypasta } = require("./copypasta");
 const { send_message } = require("./utils");
 const { AllowedChannels } = require("./config");
+const { mimc } = require("./mimic");
 
 var registered_commands = {
     "makify": {
@@ -19,6 +20,10 @@ var registered_commands = {
     },
     "wiki": {
         "function": wiki_search,
+    },
+    "mimic": {
+        "function": mimc,
+        "require_db":true,
     },
 };
 

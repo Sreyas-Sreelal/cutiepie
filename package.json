@@ -6,6 +6,7 @@
   "dependencies": {
     "discord-user-bots": "^1.4.0",
     "fs": "0.0.1-security",
+    "markov-generator": "^1.2.3",
     "sqlite": "^4.2.1",
     "sqlite3": "^5.1.6",
     "wikipedia": "^1.1.8",
@@ -13,7 +14,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"node index.js"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC"
