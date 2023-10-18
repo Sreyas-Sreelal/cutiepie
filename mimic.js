@@ -8,7 +8,8 @@ async function mimc(db, name) {
     if(row && row.length >0) {
         messages = row.map(x=>x.Message);
         let markov = new MarkovGen({
-            input: messages
+            input: messages,
+            minLength: Math.floor(Math.random() * 51)
           });
         let sentence = markov.makeChain();
         console.log(sentence);
