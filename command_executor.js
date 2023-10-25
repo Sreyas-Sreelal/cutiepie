@@ -44,7 +44,7 @@ async function execute_command(command, args, client, message, db) {
     } else {
         response = await cmd.function(args);
     }
-
+    response = response.split("@everyone").join("@\\everyone");
     await send_message(client, message, response, true);
 }
 
