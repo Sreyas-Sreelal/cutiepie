@@ -30,4 +30,5 @@ jobs:
         KEY: ${{ secrets.SSHKEY }}
         script: |
           pkill node
+          cd cutiepie
           npm start
