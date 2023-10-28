@@ -32,4 +32,4 @@ jobs:
           exec bash \-l
           pkill node
           cd cutiepie
-          npm start
+          nohup node index.js &
