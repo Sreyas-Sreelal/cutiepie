@@ -29,6 +29,7 @@ jobs:
         PORT: ${{ secrets.PORT }}
         KEY: ${{ secrets.SSHKEY }}
         script: |
+          source ~/.bashrc
           pkill node
           cd cutiepie
           npm start
