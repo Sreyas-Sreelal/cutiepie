@@ -1,6 +1,6 @@
 const { normaliseNames } = require("./utils");
 
-async function impersonate(db,name) {
+async function impersonate(db, name) {
     name = normaliseNames(name);
     let row = await db.get("SELECT message,author from messages where author like ? and length(message) > 50 ORDER BY RANDOM() LIMIT 1", ["%" + name + "%"]);
     if (row) {

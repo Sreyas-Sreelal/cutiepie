@@ -26,7 +26,7 @@ const nameMaps = {
     "botman": "x_zl",
     "cow": "danni#8541",
     "lia": "emiliaaaaaaa",
-    "gef":"emiliaaaaaaa"
+    "gef": "emiliaaaaaaa"
 };
 
 module.exports = {

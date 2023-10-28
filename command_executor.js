@@ -23,7 +23,7 @@ var registered_commands = {
     },
     "mimic": {
         "function": mimc,
-        "require_db":true,
+        "require_db": true,
     },
 };
 

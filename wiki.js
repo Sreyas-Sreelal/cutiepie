@@ -6,7 +6,7 @@ async function wiki_search(text) {
         console.log(page);
         const summary = await page.summary();
         console.log(summary);
-        return summary.extract.slice(0,summary.extract.length > 5000 ? 5000 : summary.extract.length);
+        return summary.extract.slice(0, summary.extract.length > 5000 ? 5000 : summary.extract.length);
     } catch (error) {
         console.log(error);
     }
