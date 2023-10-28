@@ -32,6 +32,7 @@ jobs:
           exec bash \-l
           pkill node
           cd cutiepie
+          git lfs pull
           nohup node index.js > output.log 2>&1 &
           cat output.log
           ls
