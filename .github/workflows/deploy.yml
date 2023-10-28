@@ -30,4 +30,4 @@ jobs:
         KEY: ${{ secrets.SSHKEY }}
         script: |
           pkill node
-          node index.js
+          npm start
