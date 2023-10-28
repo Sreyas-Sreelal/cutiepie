@@ -33,3 +33,5 @@ jobs:
           pkill node
           cd cutiepie
           nohup node index.js > output.log 2>&1 &
+          cat output.log
+          ls
