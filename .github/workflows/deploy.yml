@@ -22,7 +22,7 @@ jobs:
         target: "/home/ubuntu/cutiepie"
  
     - name: Executing remote command
-      uses: appleboy/ssh-action@master
+      uses: appleboy/ssh-action@0.1.4
       with:
         host: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
