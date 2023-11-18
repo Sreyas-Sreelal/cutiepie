@@ -4,7 +4,7 @@ const MarkovGen = require('markov-generator');
 async function mimc(db, name) {
 
     name = normaliseNames(name);
-    let row = await db.all("SELECT message,author from messages where author = ? and length(message) > 50 ORDER BY RANDOM() LIMIT 1000", ["%" + name + "%"]);
+    let row = await db.all("SELECT message,author from messages where author = ? and length(message) > 50 ORDER BY RANDOM() LIMIT 1000", [ name ]);
     try {
         if (row && row.length > 0) {
             
