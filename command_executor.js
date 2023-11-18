@@ -5,6 +5,7 @@ const { copypasta } = require("./copypasta");
 const { send_message } = require("./utils");
 const { AllowedChannels } = require("./config");
 const { mimc } = require("./mimic");
+const { mtlise } = require("./mtlise");
 
 var registered_commands = {
     "makify": {
@@ -25,6 +26,9 @@ var registered_commands = {
         "function": mimc,
         "require_db": true,
     },
+    "mtlise": {
+        "function":mtlise,
+    }
 };
 
 async function execute_command(command, args, client, message, db) {
