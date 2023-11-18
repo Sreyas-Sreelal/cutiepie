@@ -6,6 +6,8 @@ const { send_message } = require("./utils");
 const { AllowedChannels } = require("./config");
 const { mimc } = require("./mimic");
 const { mtlise } = require("./mtlise");
+const { mtl } = require("./mtl");
+const { zyrenn } = require("./zyrenn");
 
 var registered_commands = {
     "makify": {
@@ -28,13 +30,21 @@ var registered_commands = {
     },
     "mtlise": {
         "function":mtlise,
+    },
+    "mtl":{
+        "function":mtl,
+        "ignore":true,
+    },
+    "zyrenn":{
+        "function":zyrenn,
+        "ignore":true
     }
 };
 
 async function execute_command(command, args, client, message, db) {
     var cmd = registered_commands[command];
 
-    if (!AllowedChannels.includes(message.channel_id)) {
+    if (!AllowedChannels.includes(message.channel_id) && !cmd.ignore) {
         return;
     }
     if (!cmd) {
