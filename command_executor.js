@@ -44,7 +44,7 @@ var registered_commands = {
 async function execute_command(command, args, client, message, db) {
     var cmd = registered_commands[command];
 
-    if (!AllowedChannels.includes(message.channel_id) && !cmd.ignore) {
+    if (!AllowedChannels.includes(message.channel_id) && !cmd?.ignore) {
         return;
     }
     if (!cmd) {
