@@ -6,7 +6,6 @@ const { send_message } = require("./utils");
 const { AllowedChannels } = require("./config");
 const { mimc } = require("./mimic");
 const { mtlise } = require("./mtlise");
-const { mtl } = require("./mtl");
 const { zyrenn } = require("./zyrenn");
 
 var registered_commands = {
@@ -30,10 +29,6 @@ var registered_commands = {
     },
     "mtlise": {
         "function":mtlise,
-    },
-    "mtl":{
-        "function":mtl,
-        "ignore":true,
     },
     "zyrenn":{
         "function":zyrenn,

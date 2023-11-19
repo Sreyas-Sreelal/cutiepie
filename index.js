@@ -19,7 +19,7 @@ client.on.ready = async function () {
 };
 
 client.on.message_create = async function (message) {
-    //console.log(message);
+    console.log(message);
     if (message.author.username === "_SyS_" && message.channel_id === "841879631280078848" && message.content === "restart") {
 
         console.log("restarting...");
@@ -34,6 +34,7 @@ client.on.message_create = async function (message) {
             process.exit();
         }, 5000);
     }
+
     if (message.content.startsWith("/")) {
         let command_info = message.content.slice(1).split(" ");
         let command_name = command_info[0];
