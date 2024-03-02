@@ -8,6 +8,7 @@ const { mimc } = require("./mimic");
 const { mtlise } = require("./mtlise");
 const { zyrenn } = require("./zyrenn");
 const {poem}  = require("./poem");
+const {haiku}  = require("./haiku");
 
 var registered_commands = {
     "makify": {
@@ -38,6 +39,10 @@ var registered_commands = {
 
     "poem": {
         "function": poem,
+        "require_db": true,
+    },
+    "haiku": {
+        "function": haiku,
         "require_db": true,
     }
 };
