@@ -27,7 +27,7 @@ async function poem(db,name) {
         });
         let response = await data.json();
         response = response.split("<br>").join("\n");
-        return response;
+        return response.slice(0,4500);
     }
     
     return "Sorry failed to generate poem";
