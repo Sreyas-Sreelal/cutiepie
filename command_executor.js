@@ -9,6 +9,7 @@ const { mtlise } = require("./mtlise");
 const { zyrenn } = require("./zyrenn");
 const { poem } = require("./poem");
 const { haiku } = require("./haiku");
+const {imitate} = require("./imitate");
 
 var registered_commands = {
     "makify": {
@@ -44,7 +45,11 @@ var registered_commands = {
     "haiku": {
         "function": haiku,
         "require_db": true,
-    }
+    },
+    /* "imitate": {
+        "function": imitate,
+        "require_db": true,
+    } */
 };
 
 async function execute_command(command, args, client, message, db) {
