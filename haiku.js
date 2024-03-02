@@ -4,7 +4,7 @@ async function haiku(db,name) {
     
     name = normaliseNames(name);
     try {
-        let row = await db.all("SELECT message,author from messages where author = ? COLLATE NOCASE ORDER BY RANDOM() LIMIT 1000", [ name ]);
+        let row = await db.all("SELECT message,author from messages where author = ? and length(message)>50 COLLATE NOCASE ORDER BY RANDOM() LIMIT 100", [ name ]);
         if (row && row.length > 0) {
             let author = row[0].Author;
             messages = row.map(x => x.Message).join("\n");
@@ -28,13 +28,16 @@ async function haiku(db,name) {
             });
             let response = await data.json();
             response = response.split("<br>").slice(0,3).join("\n");
-            return response;
+            response = response.split('\n').map(x => "> " + x).join('\n');
+
+            return response + "\n-**"+author+"**";
         }
     } catch(err) {
         return "Sorry failed to generate haiku";
     }
-    
-    return "Sorry failed to generate haiku";
+    let row = await db.all("SELECT author from messages where author like ? and length(message) > 50 COLLATE NOCASE GROUP BY author  LIMIT 10", [ "%" + name + "%" ]);
+    let authors = row.map(x => x.Author).join(",");
+    return "Sorry failed to generate haiku.No sufficient or lengthy message found with that author or author name is invalid. Did you mean any of these users instead? ```" + authors + "```";
 }
 module.exports = {
     haiku
