@@ -7,8 +7,8 @@ const { AllowedChannels } = require("./config");
 const { mimc } = require("./mimic");
 const { mtlise } = require("./mtlise");
 const { zyrenn } = require("./zyrenn");
-const {poem}  = require("./poem");
-const {haiku}  = require("./haiku");
+const { poem } = require("./poem");
+const { haiku } = require("./haiku");
 
 var registered_commands = {
     "makify": {
@@ -29,13 +29,13 @@ var registered_commands = {
         "function": mimc,
         "require_db": true,
     },
-   /*  "mtlise": {
-        "function":mtlise,
-    },
-    "zyrenn":{
-        "function":zyrenn,
-        "ignore":true
-    } */
+    /*  "mtlise": {
+         "function":mtlise,
+     },
+     "zyrenn":{
+         "function":zyrenn,
+         "ignore":true
+     } */
 
     "poem": {
         "function": poem,
@@ -48,24 +48,30 @@ var registered_commands = {
 };
 
 async function execute_command(command, args, client, message, db) {
-    var cmd = registered_commands[command];
+    try {
+        var cmd = registered_commands[command];
 
-    /* if (!AllowedChannels.includes(message.channel_id) && !cmd?.ignore) {
-        return;
-    } */
-    if (!cmd) {
-        await send_message(client, message, "Unknown Command!", true);
-        return;
-    }
+        /* if (!AllowedChannels.includes(message.channel_id) && !cmd?.ignore) {
+            return;
+        } */
+        if (!cmd) {
+            await send_message(client, message, "Unknown Command!", true);
+            return;
+        }
 
-    let response;
-    if (cmd.require_db) {
-        response = await cmd.function(db, args);
-    } else {
-        response = await cmd.function(args);
+        let response;
+        if (cmd.require_db) {
+            response = await cmd.function(db, args);
+        } else {
+            response = await cmd.function(args);
+        }
+        response = response.split("@everyone").join("@\\everyone");
+        await send_message(client, message, response, true);
     }
-    response = response.split("@everyone").join("@\\everyone");
-    await send_message(client, message, response, true);
+    catch (err) {
+        console.log(err);
+        await send_message(client, message, "Sorry failed to execute this command for some reason. Please try again.", true);
+    }
 }
 
 module.exports = {
