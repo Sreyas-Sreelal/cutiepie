@@ -1,10 +1,10 @@
 const { normaliseNames } = require("./utils");
 
-async function haiku(db,name) {
-    
+async function haiku(db, name) {
+
     name = normaliseNames(name);
     try {
-        let row = await db.all("SELECT message,author from messages where author = ? and length(message)>50 COLLATE NOCASE ORDER BY RANDOM() LIMIT 100", [ name ]);
+        let row = await db.all("SELECT message,author from messages where author = ? and length(message)>50 COLLATE NOCASE ORDER BY RANDOM() LIMIT 100", [name]);
         if (row && row.length > 0) {
             let author = row[0].Author;
             messages = row.map(x => x.Message).join("\n");
@@ -23,19 +23,19 @@ async function haiku(db,name) {
                     "Referer": "https://www.editpad.org/tool/poem-generator",
                     "Referrer-Policy": "strict-origin-when-cross-origin"
                 },
-                "body": "_token=gJNGhuglmpU6x1iTUAuMSZ7OZ5eFaRjEzdZzHiw3&data="+ messages +"&length=Short&type=Haiku&captcha=0.es1cK_gmj23Y4RkZyBLajjnnp6t7bcp0XBZsuk3ZBQPLkdJdxWHHf9loTaH8xFSOqQ_Y2855f9s9ON95c5eQKm4IH15cEtg_TDHNtgEtA0Fr9RvxZTc6zDz-VZgPzhUT-KJ7jQqTM05cI8BnmksCLzyd0YfBnt0ao6R7BQV23IsJTmNSzq_IBOFCdMkqNSuUBzVATZ5e3aT8O157rBSQY3zOThnHjfnE8tz7t3DoXEXc8JSaHiz4eqYUGdP1ul_Ss2hwW8VETq8icUSMfmGn4dwTNMghWIRdAyaSwYccODzMilPNKAuPjHCB2AWfe0dDPsqgbcVMngRCzOLw0_PR4F2pmC6TUF1skoiZqyPrtCttWTVm_NN9I6VYilEJWBgeJ2QgYZROcCF0X_WyqNKeZ9xGAt6ZZwcKqe_rQDLs5cIcnQh-UafZ4qJDSTAd0LjB.yFU6WPuoT1z4F8qSoEq5qA.80d51f38bd570097fae73d639002b326b3a70f30fce700fca3f74061a4903849&captcha_type=0",
+                "body": "_token=gJNGhuglmpU6x1iTUAuMSZ7OZ5eFaRjEzdZzHiw3&data=" + messages + "&length=Short&type=Haiku&captcha=0.es1cK_gmj23Y4RkZyBLajjnnp6t7bcp0XBZsuk3ZBQPLkdJdxWHHf9loTaH8xFSOqQ_Y2855f9s9ON95c5eQKm4IH15cEtg_TDHNtgEtA0Fr9RvxZTc6zDz-VZgPzhUT-KJ7jQqTM05cI8BnmksCLzyd0YfBnt0ao6R7BQV23IsJTmNSzq_IBOFCdMkqNSuUBzVATZ5e3aT8O157rBSQY3zOThnHjfnE8tz7t3DoXEXc8JSaHiz4eqYUGdP1ul_Ss2hwW8VETq8icUSMfmGn4dwTNMghWIRdAyaSwYccODzMilPNKAuPjHCB2AWfe0dDPsqgbcVMngRCzOLw0_PR4F2pmC6TUF1skoiZqyPrtCttWTVm_NN9I6VYilEJWBgeJ2QgYZROcCF0X_WyqNKeZ9xGAt6ZZwcKqe_rQDLs5cIcnQh-UafZ4qJDSTAd0LjB.yFU6WPuoT1z4F8qSoEq5qA.80d51f38bd570097fae73d639002b326b3a70f30fce700fca3f74061a4903849&captcha_type=0",
                 "method": "POST"
             });
             let response = await data.json();
-            response = response.split("<br>").slice(0,3).join("\n");
+            response = response.split("<br>").slice(0, 3).join("\n");
             response = response.split('\n').map(x => "> " + x).join('\n');
 
-            return response + "\n-**"+author+"**";
+            return response + "\n-**" + author + "**";
         }
-    } catch(err) {
+    } catch (err) {
         return "Sorry failed to generate haiku";
     }
-    let row = await db.all("SELECT author from messages where author like ? and length(message) > 50 COLLATE NOCASE GROUP BY author  LIMIT 10", [ "%" + name + "%" ]);
+    let row = await db.all("SELECT author from messages where author like ? and length(message) > 50 COLLATE NOCASE GROUP BY author  LIMIT 10", ["%" + name + "%"]);
     let authors = row.map(x => x.Author).join(",");
     return "Sorry failed to generate haiku.No sufficient or lengthy message found with that author or author name is invalid. Did you mean any of these users instead? ```" + authors + "```";
 }
