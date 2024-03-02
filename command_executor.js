@@ -7,6 +7,7 @@ const { AllowedChannels } = require("./config");
 const { mimc } = require("./mimic");
 const { mtlise } = require("./mtlise");
 const { zyrenn } = require("./zyrenn");
+const {poem}  = require("./poem");
 
 var registered_commands = {
     "makify": {
@@ -27,21 +28,26 @@ var registered_commands = {
         "function": mimc,
         "require_db": true,
     },
-    "mtlise": {
+   /*  "mtlise": {
         "function":mtlise,
     },
     "zyrenn":{
         "function":zyrenn,
         "ignore":true
+    } */
+
+    "poem": {
+        "function": poem,
+        "require_db": true,
     }
 };
 
 async function execute_command(command, args, client, message, db) {
     var cmd = registered_commands[command];
 
-    if (!AllowedChannels.includes(message.channel_id) && !cmd?.ignore) {
+    /* if (!AllowedChannels.includes(message.channel_id) && !cmd?.ignore) {
         return;
-    }
+    } */
     if (!cmd) {
         await send_message(client, message, "Unknown Command!", true);
         return;
