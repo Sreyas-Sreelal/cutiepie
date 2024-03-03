@@ -56,9 +56,9 @@ async function execute_command(command, args, client, message, db) {
     try {
         var cmd = registered_commands[command];
 
-        /* if (!AllowedChannels.includes(message.channel_id) && !cmd?.ignore) {
+        if (!AllowedChannels.includes(message.channel_id) && !cmd?.ignore) {
             return;
-        } */
+        } 
         if (!cmd) {
             await send_message(client, message, "Unknown Command!", true);
             return;
