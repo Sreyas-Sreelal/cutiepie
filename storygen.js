@@ -1,15 +1,15 @@
 const { normaliseNames } = require("./utils");
 
-async function haiku(db, name) {
+async function storygen(db, name) {
 
     name = normaliseNames(name);
     try {
-        let row = await db.all("SELECT message,author from messages where author = ? and length(message)>50 COLLATE NOCASE ORDER BY RANDOM() LIMIT 10", [name]);
+        let row = await db.all("SELECT message,author from messages where author = ? and length(message)>50 COLLATE NOCASE ORDER BY RANDOM() LIMIT 20", [name]);
         if (row && row.length > 0) {
             let author = row[0].Author;
             messages = row.map(x => x.Message).join("\n");
             
-            let data = await fetch("https://gptapi.capitalizemytitle.com/poem_generator_turnstile.php?title=" + messages +"&action=haiku&number_titles=1&poem_type=haiku&enableGPT=true&recaptcha_token=bypass", {
+            let data = await fetch("https://gptapi.capitalizemytitle.com/character_name_turnstile.php?name_gender=any&action=character-backstory&number_names=1&fake=true&more_details_text="+ messages +"&character_name=" +author + "&recaptcha_token=bypass&enableGPT=true", {
                 "headers": {
                   "accept": "*/*",
                   "accept-language": "en-US,en;q=0.9,ml;q=0.8",
@@ -31,18 +31,18 @@ async function haiku(db, name) {
             console.log(response);
             response = response.data.titles[0];
             //response = response.replace("\n","\n> ");
-            response = response.split('\n').slice(0, 3).map(x => "> " + x).join('\n');
+            response = response.split('\n').map(x => "> " + x).join('\n');
 
-            return response + "\n-**" + author + "**";
+            return "Ok let me tell the story of **" + author +"**\n"+ response;
         }
     } catch (err) {
         console.log(err);
-        return "Sorry failed to generate haiku";
+        return "Sorry failed to generate story";
     }
     let row = await db.all("SELECT author from messages where author like ? and length(message) > 50 COLLATE NOCASE GROUP BY author  LIMIT 10", ["%" + name + "%"]);
     let authors = row.map(x => x.Author).join(",");
-    return "Sorry failed to generate haiku.No sufficient or lengthy message found with that author or author name is invalid. Did you mean any of these users instead? ```" + authors + "```";
+    return "Sorry failed to generate summary.No sufficient or lengthy message found with that author or author name is invalid. Did you mean any of these users instead? ```" + authors + "```";
 }
 module.exports = {
-    haiku
+    storygen
 }
