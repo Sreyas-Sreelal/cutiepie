@@ -1,7 +1,7 @@
 const { normaliseNames } = require("./utils");
 
 async function summarise(db, name) {
-    return "under maintenance lol"
+    //return "under maintenance lol"
     name = normaliseNames(name);
     try {
         let row = await db.all("SELECT message,author from messages where author = ? and length(message)>50 COLLATE NOCASE ORDER BY RANDOM() LIMIT 20", [name]);

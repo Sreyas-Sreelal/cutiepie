@@ -4,6 +4,7 @@ const AllowedChannels = [
     "801383694996602890", // bots channel in shogunate,
     "810445359297855539",  // tc channel in shogunate
     "1115758986134835281", // inshallah bot channel
+    "1115762058521231380", // hsr
 ];
 
 const blockedUsers = [
