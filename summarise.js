@@ -1,5 +1,4 @@
 const { normaliseNames } = require("./utils");
-//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
 
 const OpenAI = require("openai");
 
