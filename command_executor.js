@@ -46,11 +46,11 @@ var registered_commands = {
     "storygen": {
         "function": storygen,
         "require_db": true,
-    }
-    /* "imitate": {
+    },
+    "imitate": {
         "function": imitate,
         "require_db": true,
-    } */
+    }
 };
 
 async function execute_command(command, args, client, message, db) {
