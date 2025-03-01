@@ -6,8 +6,10 @@
   "dependencies": {
     "bing-chat": "^0.2.3",
     "discord-user-bots": "^1.4.0",
+    "elit": "file:",
     "fs": "0.0.1-security",
     "markov-generator": "^1.2.3",
+    "openai": "^4.86.1",
     "selenium-webdriver": "^4.18.1",
     "sqlite": "^4.2.1",
     "sqlite3": "^5.1.6",
